@@ -5,10 +5,8 @@ TourApp is a modern and user-friendly Android application that enables users to 
 # 📸 Screenshots
 ### 🔐 Login Screen
 ![Login](https://github.com/RidwanSupon/Tour-App/blob/77fee841114830305e1109a3e3daf87bbcad64db/screenshorts/Screenshot%20from%202025-05-27%2015-09-03.png)
-
 ### 📝 Sign Up Screen
 ![SignUp](https://github.com/RidwanSupon/Tour-App/blob/77fee841114830305e1109a3e3daf87bbcad64db/screenshorts/Screenshot%20from%202025-05-27%2015-09-10.png)
-
 ### 🏠 Home Screen (In Progress)
 ![home screen working......](https://github.com/RidwanSupon/Tour-App/blob/77fee841114830305e1109a3e3daf87bbcad64db/screenshorts/Screenshot%20from%202025-05-27%2015-10-42.png)
 
