@@ -7,10 +7,12 @@ import android.widget.ArrayAdapter;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 
+import com.example.tourapp.Adapter.CategoryAdapter;
 import com.example.tourapp.Adapter.SliderAdapter;
 import com.example.tourapp.Domain.Location;
 import com.example.tourapp.Domain.SliderItems;
@@ -39,8 +41,10 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         initLocations();
         initBanners();
+        initCategory();
     }
 
+<<<<<<< HEAD
     private void initLocations() {
         ArrayList<String> cities = new ArrayList<>();
         cities.add("Dhaka");
@@ -50,6 +54,86 @@ public class MainActivity extends AppCompatActivity {
         cities.add("Khulna");
         cities.add("Rajshahi");
         cities.add("Sylhet");
+        cities.add("Rangpur");
+        cities.add("Mymensingh");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
+                android.R.layout.simple_spinner_item, cities);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.locationSp.setAdapter(adapter);
+        DatabaseReference myref = database.getReference("Location");
+        ArrayList<Location> list = new ArrayList<>();
+
+//        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    for (DataSnapshot issue : snapshot.getChildren()) {
+//                        Location location = issue.getValue(Location.class);
+//                        if (location != null) {
+//                            list.add(location);
+//                        }
+//                    }
+//
+//                    ArrayAdapter<Location> adapter = new ArrayAdapter<>(MainActivity.this,
+//                            android.R.layout.simple_spinner_item, list);
+//                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    binding.locationSp.setAdapter(adapter);
+//                }
+//            }
+
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                // Handle error
+//            }
+//        });
+=======
+
+    private void initCategory() {
+        binding.progressBarCategory.setVisibility(View.VISIBLE);
+
+        DatabaseReference myref = database.getReference("Category");
+        ArrayList<Category> list = new ArrayList<>();
+
+        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Category category = dataSnapshot.getValue(Category.class);
+                        if (category != null) {
+                            list.add(category);
+                        }
+                    }
+                    if (!list.isEmpty()) {
+                        binding.recyclerViewCategory.setLayoutManager(
+                                new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                        CategoryAdapter adapter = new CategoryAdapter(list);
+                        binding.recyclerViewCategory.setAdapter(adapter);
+                    }
+                }
+                binding.progressBarCategory.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                binding.progressBarCategory.setVisibility(View.GONE);
+            }
+        });
+>>>>>>> b135083 (update signin sign up and category)
+    }
+
+
+    private void initLocations() {
+        ArrayList<String> cities = new ArrayList<>();
+        cities.add("Dhaka");
+        cities.add("CoxsBazar");
+        cities.add("Sylhet");
+        cities.add("Chattogram");
+        cities.add("Khulna");
+        cities.add("Rajshahi");
+        cities.add("Barishal");
         cities.add("Rangpur");
         cities.add("Mymensingh");
 

@@ -5,5 +5,7 @@
     <color name="purple">#9a0ca4</color>
     <color name="darkBlue">#253f66</color>
     <color name="LightGray">#efefef</color>
+    <color name="lightBlue">#ADD8E6</color> <!-- Light Blue -->
+
 
 </resources>
