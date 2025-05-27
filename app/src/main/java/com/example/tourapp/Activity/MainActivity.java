@@ -42,32 +42,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initLocations() {
+        ArrayList<String> cities = new ArrayList<>();
+        cities.add("Dhaka");
+        cities.add("Barishal");
+        cities.add("Cumilla");
+        cities.add("Chattogram");
+        cities.add("Khulna");
+        cities.add("Rajshahi");
+        cities.add("Sylhet");
+        cities.add("Rangpur");
+        cities.add("Mymensingh");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
+                android.R.layout.simple_spinner_item, cities);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.locationSp.setAdapter(adapter);
         DatabaseReference myref = database.getReference("Location");
         ArrayList<Location> list = new ArrayList<>();
 
-        myref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot issue : snapshot.getChildren()) {
-                        Location location = issue.getValue(Location.class);
-                        if (location != null) {
-                            list.add(location);
-                        }
-                    }
+//        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    for (DataSnapshot issue : snapshot.getChildren()) {
+//                        Location location = issue.getValue(Location.class);
+//                        if (location != null) {
+//                            list.add(location);
+//                        }
+//                    }
+//
+//                    ArrayAdapter<Location> adapter = new ArrayAdapter<>(MainActivity.this,
+//                            android.R.layout.simple_spinner_item, list);
+//                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    binding.locationSp.setAdapter(adapter);
+//                }
+//            }
 
-                    ArrayAdapter<Location> adapter = new ArrayAdapter<>(MainActivity.this,
-                            android.R.layout.simple_spinner_item, list);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    binding.locationSp.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle error
-            }
-        });
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                // Handle error
+//            }
+//        });
     }
 
     private void banners(ArrayList<SliderItems> items) {
