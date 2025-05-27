@@ -4,8 +4,9 @@ TourApp is a modern and user-friendly Android application that enables users to 
 
 # 📸 Screenshots
 
-![Home Screen](screenshots/home_screen.png)
-![Package Details](screenshots/package_details.png)
+![Login](https://github.com/RidwanSupon/Tour-App/blob/77fee841114830305e1109a3e3daf87bbcad64db/screenshorts/Screenshot%20from%202025-05-27%2015-09-03.png)
+![SignUp](https://github.com/RidwanSupon/Tour-App/blob/77fee841114830305e1109a3e3daf87bbcad64db/screenshorts/Screenshot%20from%202025-05-27%2015-09-10.png)
+![home screen working......](https://github.com/RidwanSupon/Tour-App/blob/77fee841114830305e1109a3e3daf87bbcad64db/screenshorts/Screenshot%20from%202025-05-27%2015-10-42.png)
 # ✨ Key Features
 Recent Tour Packages: Display the latest and most popular tour packages in real-time.
 
