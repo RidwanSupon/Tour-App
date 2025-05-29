@@ -1,6 +1,7 @@
 package com.example.tourapp.Activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.tourapp.Adapter.CategoryAdapter;
 import com.example.tourapp.Adapter.SliderAdapter;
@@ -30,6 +32,25 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private FirebaseDatabase database;
 
+    // Handler and Runnable for automatic banner sliding
+    private final Handler sliderHandler = new Handler();
+
+    private final Runnable sliderRunnable = new Runnable() {
+        @Override
+        public void run() {
+            int currentPosition = binding.viewPager2.getCurrentItem();
+            int itemCount = binding.viewPager2.getAdapter() != null ? binding.viewPager2.getAdapter().getItemCount() : 0;
+            if (itemCount == 0) return;
+
+            // Move to next position, loop to first if at end
+            int nextPosition = (currentPosition + 1) % itemCount;
+            binding.viewPager2.setCurrentItem(nextPosition, true);
+
+            // Schedule next slide after 3 seconds
+            sliderHandler.postDelayed(this, 3000);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +60,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         database = FirebaseDatabase.getInstance();
+
         initLocations();
         initBanners();
         initCategory();
     }
 
     private void initLocations() {
+        // Static city list for spinner
         ArrayList<String> cities = new ArrayList<>();
         cities.add("Dhaka");
+        cities.add("CoxsBazar");
         cities.add("Barishal");
         cities.add("Cumilla");
         cities.add("Chattogram");
@@ -60,44 +84,45 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, cities);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.locationSp.setAdapter(adapter);
-        DatabaseReference myref = database.getReference("Location");
-        ArrayList<Location> list = new ArrayList<>();
 
-//        myref.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    for (DataSnapshot issue : snapshot.getChildren()) {
-//                        Location location = issue.getValue(Location.class);
-//                        if (location != null) {
-//                            list.add(location);
-//                        }
-//                    }
-//
-//                    ArrayAdapter<Location> adapter = new ArrayAdapter<>(MainActivity.this,
-//                            android.R.layout.simple_spinner_item, list);
-//                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                    binding.locationSp.setAdapter(adapter);
-//                }
-//            }
-
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                // Handle error
-//            }
-//        });
+        // Firebase location data fetching code is commented out
     }
 
     private void banners(ArrayList<SliderItems> items) {
         binding.viewPager2.setAdapter(new SliderAdapter(items, binding.viewPager2));
+
+        // Setup ViewPager2 properties for better UX
         binding.viewPager2.setClipToPadding(false);
         binding.viewPager2.setClipChildren(false);
         binding.viewPager2.setOffscreenPageLimit(3);
         binding.viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
+        // CompositePageTransformer to combine multiple effects
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+
+        // Add margin between pages
         compositePageTransformer.addTransformer(new MarginPageTransformer(40));
+
+        // Add scaling effect for smooth transition
+        compositePageTransformer.addTransformer((page, position) -> {
+            float scale = 0.85f + (1 - Math.abs(position)) * 0.15f;
+            page.setScaleY(scale);
+        });
+
         binding.viewPager2.setPageTransformer(compositePageTransformer);
+
+        // Start automatic banner sliding every 3 seconds
+        sliderHandler.postDelayed(sliderRunnable, 3000);
+
+        // Reset the timer when user manually swipes to prevent conflicts
+        binding.viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                sliderHandler.removeCallbacks(sliderRunnable);
+                sliderHandler.postDelayed(sliderRunnable, 3000);
+            }
+        });
     }
 
     private void initBanners() {
@@ -161,4 +186,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Remove callbacks to avoid memory leaks
+        sliderHandler.removeCallbacks(sliderRunnable);
+    }
 }

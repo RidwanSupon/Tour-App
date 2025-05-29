@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.tourapp">
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,7 @@
         android:theme="@style/Theme.TourApp"
         tools:targetApi="31">
 
-        <!-- Start with LoginActivity -->
+        <!-- LoginActivity is the launcher -->
         <activity
             android:name=".Activity.LoginActivity"
             android:exported="true">
@@ -23,8 +24,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activity.SignupActivity" />
-        <activity android:name=".Activity.MainActivity" />
+        <!-- OnboardingActivity shown once after first login -->
+        <activity
+            android:name=".Activity.OnboardingActivity"
+            android:exported="true" />
+
+        <!-- MainActivity shown after onboarding -->
+        <activity
+            android:name=".Activity.MainActivity"
+            android:exported="false" />
+
+        <!-- SignupActivity for new user registration -->
+        <activity
+            android:name=".Activity.SignupActivity"
+            android:exported="false" />
 
     </application>
 
