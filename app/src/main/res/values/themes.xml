@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.TourApp" parent="Base.Theme.TourApp" />
+    <style name="roundedCorner">
+        <item name="cornerSize">20dp</item>
+    </style>
 </resources>

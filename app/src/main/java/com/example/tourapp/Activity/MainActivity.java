@@ -1,5 +1,19 @@
 package com.example.tourapp.Activity;
 
+import com.example.tourapp.Adapter.CategoryAdapter;
+import com.example.tourapp.Adapter.PopularAdapter;
+import com.example.tourapp.Adapter.SliderAdapter;
+import com.example.tourapp.Domain.PopularItem;
+import com.example.tourapp.Domain.SliderItems;
+import com.example.tourapp.databinding.ActivityMainBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -13,17 +27,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
-
-import com.example.tourapp.Adapter.CategoryAdapter;
-import com.example.tourapp.Adapter.SliderAdapter;
-import com.example.tourapp.Domain.Location;
-import com.example.tourapp.Domain.SliderItems;
-import com.example.tourapp.databinding.ActivityMainBinding;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -55,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -64,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
         initLocations();
         initBanners();
         initCategory();
+        initPopular(); // ⭐ Added popular section
     }
 
     private void initLocations() {
-        // Static city list for spinner
         ArrayList<String> cities = new ArrayList<>();
         cities.add("Dhaka");
         cities.add("CoxsBazar");
@@ -84,41 +86,29 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, cities);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.locationSp.setAdapter(adapter);
-
-        // Firebase location data fetching code is commented out
     }
 
     private void banners(ArrayList<SliderItems> items) {
         binding.viewPager2.setAdapter(new SliderAdapter(items, binding.viewPager2));
-
-        // Setup ViewPager2 properties for better UX
         binding.viewPager2.setClipToPadding(false);
         binding.viewPager2.setClipChildren(false);
         binding.viewPager2.setOffscreenPageLimit(3);
         binding.viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
-        // CompositePageTransformer to combine multiple effects
-        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-
-        // Add margin between pages
-        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
-
-        // Add scaling effect for smooth transition
-        compositePageTransformer.addTransformer((page, position) -> {
+        CompositePageTransformer transformer = new CompositePageTransformer();
+        transformer.addTransformer(new MarginPageTransformer(40));
+        transformer.addTransformer((page, position) -> {
             float scale = 0.85f + (1 - Math.abs(position)) * 0.15f;
             page.setScaleY(scale);
         });
 
-        binding.viewPager2.setPageTransformer(compositePageTransformer);
+        binding.viewPager2.setPageTransformer(transformer);
 
-        // Start automatic banner sliding every 3 seconds
         sliderHandler.postDelayed(sliderRunnable, 3000);
 
-        // Reset the timer when user manually swipes to prevent conflicts
         binding.viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
-                super.onPageSelected(position);
                 sliderHandler.removeCallbacks(sliderRunnable);
                 sliderHandler.postDelayed(sliderRunnable, 3000);
             }
@@ -126,16 +116,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initBanners() {
-        DatabaseReference myRef = database.getReference("Banner");
+        DatabaseReference ref = database.getReference("Banner");
         binding.progressBarBanner.setVisibility(View.VISIBLE);
         ArrayList<SliderItems> items = new ArrayList<>();
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    for (DataSnapshot issue : snapshot.getChildren()) {
-                        SliderItems item = issue.getValue(SliderItems.class);
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        SliderItems item = data.getValue(SliderItems.class);
                         if (item != null) {
                             items.add(item);
                         }
@@ -155,16 +145,16 @@ public class MainActivity extends AppCompatActivity {
     private void initCategory() {
         binding.progressBarCategory.setVisibility(View.VISIBLE);
 
-        DatabaseReference myref = database.getReference("Category");
+        DatabaseReference ref = database.getReference("Category");
         ArrayList<Category> list = new ArrayList<>();
 
-        myref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Category category = dataSnapshot.getValue(Category.class);
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        Category category = data.getValue(Category.class);
                         if (category != null) {
                             list.add(category);
                         }
@@ -186,10 +176,44 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void initPopular() {
+        binding.progressBarPopular.setVisibility(View.VISIBLE);
+
+        DatabaseReference ref = database.getReference("Popular");
+        ArrayList<PopularItem> list = new ArrayList<>();
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        PopularItem item = data.getValue(PopularItem.class);
+                        if (item != null) {
+                            list.add(item);
+                        }
+                    }
+                    if (!list.isEmpty()) {
+                        binding.recyclerViewPopular.setLayoutManager(
+                                new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                        PopularAdapter adapter = new PopularAdapter(MainActivity.this, list);
+                        binding.recyclerViewPopular.setAdapter(adapter);
+                    }
+
+                }
+                binding.progressBarPopular.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                binding.progressBarPopular.setVisibility(View.GONE);
+            }
+        });
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Remove callbacks to avoid memory leaks
         sliderHandler.removeCallbacks(sliderRunnable);
     }
 }
