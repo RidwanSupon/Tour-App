@@ -2,8 +2,10 @@ package com.example.tourapp.Activity;
 
 import com.example.tourapp.Adapter.CategoryAdapter;
 import com.example.tourapp.Adapter.PopularAdapter;
+import com.example.tourapp.Adapter.RecommendedAdapter;   // <-- Added
 import com.example.tourapp.Adapter.SliderAdapter;
 import com.example.tourapp.Domain.PopularItem;
+import com.example.tourapp.Domain.RecommendedItem;        // <-- Added
 import com.example.tourapp.Domain.SliderItems;
 import com.example.tourapp.databinding.ActivityMainBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -11,8 +13,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private FirebaseDatabase database;
 
-    // Handler and Runnable for automatic banner sliding
     private final Handler sliderHandler = new Handler();
 
     private final Runnable sliderRunnable = new Runnable() {
@@ -45,11 +44,9 @@ public class MainActivity extends AppCompatActivity {
             int itemCount = binding.viewPager2.getAdapter() != null ? binding.viewPager2.getAdapter().getItemCount() : 0;
             if (itemCount == 0) return;
 
-            // Move to next position, loop to first if at end
             int nextPosition = (currentPosition + 1) % itemCount;
             binding.viewPager2.setCurrentItem(nextPosition, true);
 
-            // Schedule next slide after 3 seconds
             sliderHandler.postDelayed(this, 3000);
         }
     };
@@ -66,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
         initLocations();
         initBanners();
         initCategory();
-        initPopular(); // ⭐ Added popular section
+        initPopular();
+        initRecommended();  // <-- Added call here
     }
 
     private void initLocations() {
@@ -207,6 +205,41 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 binding.progressBarPopular.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    // New method for Recommended section
+    private void initRecommended() {
+        binding.progressBarRecommended.setVisibility(View.VISIBLE);
+
+        DatabaseReference ref = database.getReference("Item");
+        ArrayList<RecommendedItem> list = new ArrayList<>();
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        RecommendedItem item = data.getValue(RecommendedItem.class);
+                        if (item != null) {
+                            list.add(item);
+                        }
+                    }
+                    if (!list.isEmpty()) {
+                        binding.recyclerViewRecommended.setLayoutManager(
+                                new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                        RecommendedAdapter adapter = new RecommendedAdapter(MainActivity.this, list);
+                        binding.recyclerViewRecommended.setAdapter(adapter);
+                    }
+                }
+                binding.progressBarRecommended.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                binding.progressBarRecommended.setVisibility(View.GONE);
             }
         });
     }
