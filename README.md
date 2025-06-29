@@ -29,7 +29,7 @@ Android Studio	IDE for development
 
 Firebase Realtime Database	Backend for storing tour packages
 
-ViewPager2	For image sliders
+ViewPager2	for image sliders
 
 Glide	Image loading and caching
 
