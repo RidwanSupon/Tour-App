@@ -33,7 +33,7 @@ ViewPager2	For image sliders
 
 Glide	Image loading and caching
 
-RecyclerView	For displaying package lists
+RecyclerView	for displaying package lists
 
 # Target Audience
 Frequent Travelers
@@ -56,6 +56,6 @@ git clone https://github.com/RidwanSupon/TourApp.git
 
 4. Add your google-services.json file to the app/ directory
 
-5. Make sure Realtime Database is enabled and configured properly.
+5. Ensure that the Realtime Database is enabled and properly configured.
 
-6. Build and Run the App on an emulator or physical Android device.
+6. Build and run the App on an emulator or a physical Android device.
