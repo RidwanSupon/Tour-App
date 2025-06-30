@@ -1,6 +1,7 @@
 package com.example.tourapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tourapp.Domain.RecommendedItem;
+import com.example.tourapp.Activity.DetailActivity;
 import com.example.tourapp.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -19,7 +21,7 @@ import java.util.List;
 public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.RecommendedViewHolder> {
 
     private Context context;
-    private List<RecommendedItem> itemList;  // <-- fixed spelling
+    private List<RecommendedItem> itemList;
 
     public RecommendedAdapter(Context context, List<RecommendedItem> itemList) {
         this.context = context;
@@ -35,18 +37,40 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RecommendedViewHolder holder, int position) {
-        RecommendedItem item = itemList.get(position);  // <-- fixed spelling
+        RecommendedItem item = itemList.get(position);
 
         holder.titleTxt.setText(item.getTitle());
         holder.addressTxt.setText(item.getAddress());
         holder.priceTxt.setText("৳" + item.getPrice());
         holder.durationTxt.setText(item.getDuration());
-        holder.bedCountTxt.setText("Beds: " + item.getBedCount());  // <-- use getBedCount()
+        holder.bedCountTxt.setText("Beds: " + item.getBedCount());
         holder.tourGuideNameTxt.setText("Guide: " + item.getTourGuideName());
         holder.scoreTxt.setText(String.format("%.1f", item.getScore()));
 
         Glide.with(context).load(item.getPic()).into(holder.pic);
         Glide.with(context).load(item.getTourGuidePic()).into(holder.tourGuidePic);
+
+        // ক্লিক হ্যান্ডলার যোগ
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailActivity.class);
+
+            // ডাটা পাস করো ইন্টেন্টে
+            intent.putExtra("title", item.getTitle());
+            intent.putExtra("description", item.getDescription());
+            intent.putExtra("address", item.getAddress());
+            intent.putExtra("bedCount", item.getBedCount());
+            intent.putExtra("duration", item.getDuration());
+            intent.putExtra("price", item.getPrice());
+            intent.putExtra("tourGuideName", item.getTourGuideName());
+            intent.putExtra("score", item.getScore());
+            intent.putExtra("pic", item.getPic());
+            intent.putExtra("tourGuidePic", item.getTourGuidePic());
+
+            // নতুন: tourGuidePhone পাস করো
+            intent.putExtra("tourGuidePhone", item.getTourGuidePhone());
+
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -57,7 +81,6 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     public static class RecommendedViewHolder extends RecyclerView.ViewHolder {
         ShapeableImageView pic, tourGuidePic;
         TextView titleTxt, addressTxt, priceTxt, durationTxt, bedCountTxt, tourGuideNameTxt, scoreTxt;
-        // imageView4, imageView5: you can keep if used in layout or remove if not needed
 
         public RecommendedViewHolder(@NonNull View itemView) {
             super(itemView);

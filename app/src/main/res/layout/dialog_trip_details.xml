@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="#FFFAF0">  <!-- হালকা ক্রিম ব্যাকগ্রাউন্ড -->
+
+    <TextView
+        android:id="@+id/dialogMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#4A148C"
+    android:lineSpacingExtra="6dp"
+    android:fontFamily="sans-serif-medium"
+    android:background="#FFF3E0"
+    android:padding="12dp"
+    android:scrollbars="vertical" />
+</ScrollView>

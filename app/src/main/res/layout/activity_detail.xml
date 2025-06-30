@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <!-- Main Image -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/pic"
+            android:layout_width="0dp"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/roundedCorner"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/titleTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Trip Title"
+            android:textColor="@color/darkBlue"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/pic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/descriptionTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Detailed description will appear here."
+            android:textColor="#444444"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/titleTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Address + Location -->
+        <ImageView
+            android:id="@+id/locationIcon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="14dp"
+            android:contentDescription="Location Icon"
+            app:srcCompat="@drawable/location"
+            app:layout_constraintTop_toBottomOf="@id/descriptionTxt"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/addressTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Location Address"
+            android:textColor="@color/darkBlue"
+            android:textSize="14sp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@id/descriptionTxt"
+            app:layout_constraintStart_toEndOf="@id/locationIcon"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Bed Count -->
+        <TextView
+            android:id="@+id/bedCountTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beds: 3"
+            android:textColor="@color/darkBlue"
+            android:textSize="14sp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@id/addressTxt"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Duration -->
+        <TextView
+            android:id="@+id/durationTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1D / 1N"
+            android:textColor="@color/darkBlue"
+            android:textSize="14sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@id/addressTxt"
+            app:layout_constraintStart_toEndOf="@id/bedCountTxt" />
+
+        <!-- Price -->
+        <TextView
+            android:id="@+id/priceTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="৳900"
+            android:textColor="@color/purple"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@id/addressTxt"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#e0e0e0"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/bedCountTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Tour Guide Picture -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/tourGuidePic"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/roundedCorner"
+            app:layout_constraintTop_toBottomOf="@id/bedCountTxt"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Tour Guide Name -->
+        <TextView
+            android:id="@+id/tourGuideNameTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Guide: Tina Anderson"
+            android:textColor="@color/darkBlue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="12dp"
+            app:layout_constraintTop_toTopOf="@id/tourGuidePic"
+            app:layout_constraintBottom_toBottomOf="@id/tourGuidePic"
+            app:layout_constraintStart_toEndOf="@id/tourGuidePic"
+            app:layout_constraintEnd_toStartOf="@id/starIcon" />
+
+        <!-- Score and Star -->
+        <ImageView
+            android:id="@+id/starIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/star"
+            app:layout_constraintTop_toTopOf="@id/tourGuidePic"
+            app:layout_constraintEnd_toStartOf="@id/scoreTxt"
+            android:layout_marginEnd="4dp" />
+
+        <TextView
+            android:id="@+id/scoreTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.5"
+            android:textColor="@color/darkBlue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/tourGuidePic"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Book Now Button -->
+        <Button
+            android:id="@+id/bookNowBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Book Now"
+            android:textAllCaps="false"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/purple"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@id/tourGuidePic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Tour Partners Button -->
+        <Button
+            android:id="@+id/viewTourPartnersBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="View Tour Partners"
+            android:textAllCaps="false"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/teal_700"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@id/bookNowBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Booking Form Layout (Initially Hidden) -->
+        <LinearLayout
+            android:id="@+id/bookingFormLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/viewTourPartnersBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <EditText
+                android:id="@+id/contactNameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contact Name"
+                android:inputType="textPersonName"
+                android:backgroundTint="@color/darkBlue"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:id="@+id/contactNumberInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contact Number"
+                android:inputType="phone"
+                android:backgroundTint="@color/darkBlue"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:id="@+id/totalPeopleInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Total People"
+                android:inputType="number"
+                android:backgroundTint="@color/darkBlue"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:id="@+id/childInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Child"
+                android:inputType="number"
+                android:backgroundTint="@color/darkBlue"
+                android:layout_marginBottom="10dp" />
+
+            <EditText
+                android:id="@+id/bedRoomInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Needed Bed or Room"
+                android:inputType="text"
+                android:backgroundTint="@color/darkBlue"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/submitBookingBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit Booking"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/purple"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -13,6 +13,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;  // Import লাগলে যোগ করো
+import com.example.tourapp.R;
+import android.content.Intent;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -60,12 +63,25 @@ public class MainActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
 
+        // Bottom navigation listener এখানে যোগ করো
+        binding.chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int id) {
+                if (id == R.id.cart) {  // Profile আইডি যেটা তোমার menu_bottom.xml এ আছে
+                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                }
+                // অন্য বাটন গুলোর জন্য কাজ লাগলে এখানে লিখবে
+            }
+        });
+
         initLocations();
         initBanners();
         initCategory();
         initPopular();
-        initRecommended();  // <-- Added call here
+        initRecommended();
     }
+
 
     private void initLocations() {
         ArrayList<String> cities = new ArrayList<>();

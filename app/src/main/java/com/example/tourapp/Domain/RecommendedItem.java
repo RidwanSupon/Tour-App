@@ -10,13 +10,18 @@ public class RecommendedItem {
     private String pic;
     private String tourGuideName;
     private String tourGuidePic;
+    private String description;
+
+    // নতুন ফিল্ড: tourGuidePhone
+    private String tourGuidePhone;
 
     // No-arg constructor required by Firebase
     public RecommendedItem() {
     }
 
     public RecommendedItem(String title, String address, int bedCount, String duration, double score,
-                           int price, String pic, String tourGuideName, String tourGuidePic) {
+                           int price, String pic, String tourGuideName, String tourGuidePic, String description,
+                           String tourGuidePhone) {
         this.title = title;
         this.address = address;
         this.bedCount = bedCount;
@@ -26,6 +31,8 @@ public class RecommendedItem {
         this.pic = pic;
         this.tourGuideName = tourGuideName;
         this.tourGuidePic = tourGuidePic;
+        this.description = description;
+        this.tourGuidePhone = tourGuidePhone;
     }
 
     // Getters
@@ -38,6 +45,8 @@ public class RecommendedItem {
     public String getPic() { return pic; }
     public String getTourGuideName() { return tourGuideName; }
     public String getTourGuidePic() { return tourGuidePic; }
+    public String getDescription() { return description; }
+    public String getTourGuidePhone() { return tourGuidePhone; }  // নতুন
 
     // Setters
     public void setTitle(String title) { this.title = title; }
@@ -49,4 +58,6 @@ public class RecommendedItem {
     public void setPic(String pic) { this.pic = pic; }
     public void setTourGuideName(String tourGuideName) { this.tourGuideName = tourGuideName; }
     public void setTourGuidePic(String tourGuidePic) { this.tourGuidePic = tourGuidePic; }
+    public void setDescription(String description) { this.description = description; }
+    public void setTourGuidePhone(String tourGuidePhone) { this.tourGuidePhone = tourGuidePhone; }  // নতুন
 }

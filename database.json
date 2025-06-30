@@ -1,181 +1,166 @@
 {
   "Onboarding": [
     {
+      "id": 0,
       "url": "https://res.cloudinary.com/dsms7vvq3/image/upload/v1748410697/Red_Modern_Animated_Mobil_News_App_Promotion_Instagram_Story_pbgub8.png"
     }
   ],
   "Banner": [
     {
+      "id": 0,
       "url": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897670/banner1_m1ujkq.png"
     },
     {
+      "id": 1,
       "url": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897671/banner2_nhxtfd.png"
     }
   ],
   "Category": [
     {
-      "Id": 0,
-      "ImagePath": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/cat1_axlnep.png",
-      "Name": "Beach"
+      "id": 0,
+      "imagePath": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/cat1_axlnep.png",
+      "name": "সৈকত (Beach)"
     },
     {
-      "Id": 1,
-      "ImagePath": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897673/cat2_hhr8ya.png",
-      "Name": "Camp"
+      "id": 1,
+      "imagePath": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897673/cat2_hhr8ya.png",
+      "name": "ক্যাম্পিং (Camp)"
     },
     {
-      "Id": 2,
-      "ImagePath": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897673/cat3_xisw9t.png",
-      "Name": "Jungle"
+      "id": 2,
+      "imagePath": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897673/cat3_xisw9t.png",
+      "name": "জঙ্গল (Jungle)"
     },
     {
-      "Id": 3,
-      "ImagePath": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897673/cat4_pa7wb0.png",
-      "Name": "Desert"
+      "id": 3,
+      "imagePath": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897673/cat4_pa7wb0.png",
+      "name": "মরুভূমি (Desert)"
     },
     {
-      "Id": 4,
-      "ImagePath": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897673/cat5_gxiy2z.png",
-      "Name": "Mountain"
-    },
-    {
-      "Id": 5,
-      "ImagePath": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897673/cat5_gxiy2z.png",
-      "Name": "Mountain"
+      "id": 4,
+      "imagePath": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897673/cat5_gxiy2z.png",
+      "name": "পর্বত (Mountain)"
     }
   ],
   "Item": [
     {
-      "address": "Hawaie, USA",
-      "bed": 2,
-      "dateTour": "17 June 2024",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "distance": "30Km",
-      "duration": "3D / 2N",
-      "pic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897640/location_1_psppir.jpg",
-      "price": 900,
-      "score": 4.5,
-      "timeTour": "8:00 PM",
-      "title": "Band Island Beach",
-      "tourGuideName": "Tina Anderson",
-      "tourGuidePhone": "001123456789",
-      "tourGuidePic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/profile_wxamui.png"
-    },
-    {
-      "address": "Lombok,Indonesia",
-      "bed": 1,
-      "dateTour": "18 June 2024",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "distance": "20Km",
-      "duration": "3D / 2N",
-      "pic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897640/location_3_td4yp6.jpg",
-      "price": 800,
-      "score": 4.6,
-      "timeTour": "4:00 PM",
-      "title": "Komodo Island",
-      "tourGuideName": "Tina Anderson",
-      "tourGuidePhone": "001123456789",
-      "tourGuidePic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/profile_wxamui.png"
-    },
-    {
-      "address": "LosAngles, USA",
-      "bed": 2,
-      "dateTour": "20 July 2024",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "distance": "90Km",
-      "duration": "2D / 1N",
-      "pic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897641/location_4_zxcxts.jpg",
-      "price": 750,
-      "score": 4.9,
-      "timeTour": "2:00 PM",
-      "title": "Kelingking Beach",
-      "tourGuideName": "Tina Anderson",
-      "tourGuidePhone": "001123456789",
-      "tourGuidePic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/profile_wxamui.png"
-    },
-    {
-      "address": "Bali, Indonesia",
+      "id": 0,
+      "title": "কক্সবাজার সমুদ্র সৈকত",
+      "address": "কক্সবাজার, বাংলাদেশ",
       "bed": 3,
-      "dateTour": "10 July 2024",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "distance": "200Km",
-      "duration": "1D / 1N",
+      "dateTour": "২১ আগস্ট ২০২৫",
+      "description": "বিশ্বের দীর্ঘতম সমুদ্র সৈকত হওয়ায় কক্সবাজার তার অপরূপা প্রাকৃতিক সৌন্দর্য এবং বিস্তীর্ণ বালুকাময় তটরেখার জন্য বিশ্বব্যাপী পরিচিত। এখানে সূর্যাস্তের মনোমুগ্ধকর দৃশ্য, নীল সাগরের ঢেউ ও মৃদু হাওয়ার সমন্বয়ে পর্যটকদের জন্য একটি স্বপ্নীল গন্তব্য তৈরি হয়েছে। বিশ্রাম এবং অবকাশযাপন কিংবা পরিবার ও বন্ধুদের সাথে আনন্দময় সময় কাটানোর জন্য এটি আদর্শ স্থান। এছাড়াও, সৈকতে বিভিন্ন জলক্রীড়া ও স্থানীয় খাবারের স্বাদ গ্রহণের সুযোগ রয়েছে।",
+      "distance": "৪৭০ কিমি",
+      "duration": "৩ দিন / ২ রাত",
+      "pic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897640/location_1_psppir.jpg",
+      "price": 15000,
+      "score": 4.8,
+      "timeTour": "৮:০০ AM",
+      "tourGuideName": "সুমাইয়া আক্তার",
+      "tourGuidePhone": "+৮৮০১৭১২৩৪৫৬৭৮",
+      "tourGuidePic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/profile_wxamui.png"
+    },
+    {
+      "id": 1,
+      "title": "সুন্দরবন ম্যানগ্রোভ ফরেস্ট",
+      "address": "খুলনা, বাংলাদেশ",
+      "bed": 2,
+      "dateTour": "২৬ জুলাই ২০২৫",
+      "description": "বিশ্বখ্যাত সুন্দরবন ম্যানগ্রোভ বন হলো বিশাল ও অপরূপ প্রাকৃতিক আশ্রয়স্থল, যেখানে রয়্যাল বেঙ্গল টাইগারসহ বহু বিলুপ্তপ্রায় প্রাণী ও পাখির আবাস। এই অনন্য পরিবেশে বিভিন্ন প্রজাতির ম্যানগ্রোভ গাছ, নদী ও খালের সমন্বয়ে প্রকৃতির এক অবিশ্বাস্য চিত্র ফুটে ওঠে। প্রকৃতি প্রেমী ও গবেষকদের জন্য এটি অনন্য ভ্রমণের গন্তব্য যেখানে শান্তি, গাছপালা ও বন্যপ্রাণীর অভূতপূর্ব মিলন ঘটে। এখানে ক্যাম্পিং, নৌকা ভ্রমণ ও বন অভিজ্ঞতা উপভোগ করা যায়।",
+      "distance": "১৪০ কিমি",
+      "duration": "২ দিন / ১ রাত",
       "pic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897640/location_3_td4yp6.jpg",
-      "price": 600,
-      "score": 4.1,
-      "timeTour": "11:00 PM",
-      "title": "Nusa Penida",
-      "tourGuideName": "Tina Anderson",
-      "tourGuidePhone": "001123456789",
+      "price": 12000,
+      "score": 4.7,
+      "timeTour": "৯:০০ AM",
+      "tourGuideName": "আফতাব রহমান",
+      "tourGuidePhone": "+৮৮০১৯৮৭৬৫৪৩২১",
+      "tourGuidePic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/profile_wxamui.png"
+    },
+    {
+      "id": 2,
+      "title": "সিলেট চা বাগান",
+      "address": "সিলেট, বাংলাদেশ",
+      "bed": 2,
+      "dateTour": "২৫ জুলাই ২০২৫",
+      "description": "নীলাভ পাহাড়ের কোলে অবস্থিত সিলেটের চা বাগানগুলো বাংলাদেশের অন্যতম জনপ্রিয় পর্যটন স্থান। এখানে ছায়াযুক্ত সবুজ চা পাতার সারি সারি লম্বা বাগান, তাজা পাহাড়ি হাওয়া ও পাখির কূজন ভ্রমণকে করে তুলেছে এক স্বপ্নময় অভিজ্ঞতা। শান্ত পরিবেশে বিশ্রাম, ফটোগ্রাফি ও স্থানীয় সংস্কৃতির সঙ্গে পরিচয়ের জন্য এটি আদর্শ স্থান। প্রাকৃতিক পরিবেশে শরীর ও মনের পুনর্নবীকরণের জন্য এই চা বাগান ভ্রমণ এক অনন্য সুযোগ প্রদান করে।",
+      "distance": "৩০ কিমি",
+      "duration": "২ দিন / ১ রাত",
+      "pic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897640/location_3_td4yp6.jpg",
+      "price": 10000,
+      "score": 4.6,
+      "timeTour": "১০:০০ AM",
+      "tourGuideName": "সোহেল হোসেন",
+      "tourGuidePhone": "+৮৮০১৭২২২৩৩৪৫",
       "tourGuidePic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/profile_wxamui.png"
     }
   ],
   "Location": [
     {
-      "Id": 0,
-      "loc": "LA california"
+      "id": 0,
+      "loc": "কক্সবাজার"
     },
     {
-      "Id": 1,
-      "loc": "NY manhattan"
+      "id": 1,
+      "loc": "সুন্দরবন"
     },
     {
-      "Id": 2,
-      "loc": "Bali, Indonesia"
+      "id": 2,
+      "loc": "সিলেট"
     },
     {
-      "Id": 3,
-      "loc": "Lombok,Indonesia"
+      "id": 3,
+      "loc": "রাঙ্গামাটি"
     }
   ],
   "Popular": [
     {
-      "address": "Bali, Indonesia",
-      "bed": 3,
-      "dateTour": "10 July 2024",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "distance": "200Km",
-      "duration": "1D / 1N",
+      "id": 0,
+      "title": "রাঙ্গামাটি লেক ভ্রমণ",
+      "address": "রাঙ্গামাটি, বাংলাদেশ",
+      "bed": 2,
+      "dateTour": "৩০ আগস্ট ২০২৫",
+      "description": "রাঙ্গামাটির প্রাকৃতিক সৌন্দর্যের কেন্দ্রে অবস্থিত এই শান্তিপূর্ণ লেক ভ্রমণটি প্রকৃতি ও পাহাড়ের মায়ায় বিমোহিত করে। নৌকাবিহারের মাধ্যমে নীল জলরাশির মাঝে ভ্রমণ উপভোগ করা যায় যেখানে সারা বছর নানা প্রকার পাখি ও প্রকৃতির সঙ্গ উপভোগ করা সম্ভব। পাহাড়ি পরিবেশে ভ্রমণ, স্থানীয় সংস্কৃতি ও খাবারের স্বাদ গ্রহণের মাধ্যমে এটি পর্যটকদের কাছে এক মনোরম ও স্মরণীয় অভিজ্ঞতা হয়ে দাঁড়িয়েছে।",
+      "distance": "১৫০ কিমি",
+      "duration": "২ দিন / ১ রাত",
       "pic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897643/location_6_carlrn.jpg",
-      "price": 600,
-      "score": 4.1,
-      "timeTour": "11:00 PM",
-      "title": "Nusa Penida",
-      "tourGuideName": "Tina Anderson",
-      "tourGuidePhone": "001123456789",
-      "tourGuidePic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/profile_wxamui.png"
-    },
-    {
-      "address": "LosAngles, USA",
-      "bed": 2,
-      "dateTour": "20 July 2024",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "distance": "90Km",
-      "duration": "2D / 1N",
-      "pic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897650/location_2_bx8zmk.jpg",
-      "price": 750,
+      "price": 11000,
       "score": 4.9,
-      "timeTour": "2:00 PM",
-      "title": "Kelingking Beach",
-      "tourGuideName": "Tina Anderson",
-      "tourGuidePhone": "001123456789",
+      "timeTour": "৭:০০ AM",
+      "tourGuideName": "জহিরুল ইসলাম",
+      "tourGuidePhone": "+৮৮০১৯৭৭৬৫৫৪৪৩",
       "tourGuidePic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/profile_wxamui.png"
     },
     {
-      "address": "Hawaie, USA",
+      "id": 1,
+      "title": "সুন্দরবন ম্যানগ্রোভ ফরেস্ট",
+      "address": "খুলনা, বাংলাদেশ",
       "bed": 2,
-      "dateTour": "17 June 2024",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "distance": "30Km",
-      "duration": "3D / 2N",
-      "pic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897651/location_7_dxpg9m.jpg",
-      "price": 900,
-      "score": 4.5,
-      "timeTour": "8:00 PM",
-      "title": "Band Island Beach",
-      "tourGuideName": "Tina Anderson",
-      "tourGuidePhone": "001123456789",
+      "dateTour": "১২ জুলাই ২০২৫",
+      "description": "বিশ্বখ্যাত সুন্দরবন ম্যানগ্রোভ বন, যা রয়্যাল বেঙ্গল টাইগারের প্রধান আবাসস্থল, প্রকৃতি প্রেমী ও অভিযাত্রীদের জন্য এক অনন্য গন্তব্য। বিশাল জলাভূমি, ঘন সবুজ বন ও বিভিন্ন বন্যপ্রাণীর আবাসস্থল হিসেবে এই স্থানটি প্রকৃতির অপার সৌন্দর্যের দৃষ্টান্ত। ভ্রমণীরা এখানে নৌকা ভ্রমণ, বন্যপ্রাণী পর্যবেক্ষণ ও বনভূমির নিরিবিলি পরিবেশ উপভোগ করতে পারেন। পরিবেশ রক্ষায় সচেতন ভ্রমণ এই অঞ্চলের অন্যতম প্রধান আকর্ষণ।",
+      "distance": "১৪০ কিমি",
+      "duration": "২ দিন / ১ রাত",
+      "pic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897640/location_3_td4yp6.jpg",
+      "price": 12000,
+      "score": 4.7,
+      "timeTour": "৯:০০ AM",
+      "tourGuideName": "আফতাব রহমান",
+      "tourGuidePhone": "+৮৮০১৯৮৭৬৫৪৩২১",
       "tourGuidePic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/profile_wxamui.png"
+    }
+  ],
+  "Bookings": [
+    {
+      "id": 0,
+      "userId": "abc123xyz",
+      "tripTitle": "কক্সবাজার সমুদ্র সৈকত",
+      "contactName": "রিদওয়ান রহমান",
+      "contactNumber": "017XXXXXXXX",
+      "totalPeople": 4,
+      "child": 1,
+      "neededBedOrRoom": "Room",
+      "timestamp": "2025-06-30T22:00:00Z"
     }
   ]
 }
+

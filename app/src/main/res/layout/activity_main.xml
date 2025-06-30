@@ -261,6 +261,7 @@
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:layout_width="match_parent"
+        android:id="@+id/chipNavigationBar"
         android:layout_height="70dp"
         android:background="@color/white"
         app:cnb_menuResource="@menu/menu_bottom"
