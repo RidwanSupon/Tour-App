@@ -9,11 +9,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.tourapp.Domain.BookingModel;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;

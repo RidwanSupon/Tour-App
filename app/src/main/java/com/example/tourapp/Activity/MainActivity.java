@@ -2,10 +2,10 @@ package com.example.tourapp.Activity;
 
 import com.example.tourapp.Adapter.CategoryAdapter;
 import com.example.tourapp.Adapter.PopularAdapter;
-import com.example.tourapp.Adapter.RecommendedAdapter;   // <-- Added
+import com.example.tourapp.Adapter.RecommendedAdapter;
 import com.example.tourapp.Adapter.SliderAdapter;
 import com.example.tourapp.Domain.PopularItem;
-import com.example.tourapp.Domain.RecommendedItem;        // <-- Added
+import com.example.tourapp.Domain.RecommendedItem;
 import com.example.tourapp.Domain.SliderItems;
 import com.example.tourapp.databinding.ActivityMainBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -13,10 +13,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.ismaeldivita.chipnavigation.ChipNavigationBar;  // Import লাগলে যোগ করো
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.example.tourapp.R;
-import android.content.Intent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -63,12 +63,15 @@ public class MainActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
 
-        // Bottom navigation listener এখানে যোগ করো
+        // Bottom navigation listener যোগ করা হলো
         binding.chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int id) {
-                if (id == R.id.cart) {  // Profile আইডি যেটা তোমার menu_bottom.xml এ আছে
+                if (id == R.id.cart) {  // Profile
                     Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                } else if (id == R.id.explorer) {  // Explorer এ ক্লিক করলে TripListActivity চালাও
+                    Intent intent = new Intent(MainActivity.this, TripListActivity.class);
                     startActivity(intent);
                 }
                 // অন্য বাটন গুলোর জন্য কাজ লাগলে এখানে লিখবে
@@ -225,7 +228,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // New method for Recommended section
     private void initRecommended() {
         binding.progressBarRecommended.setVisibility(View.VISIBLE);
 

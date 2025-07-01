@@ -1,4 +1,4 @@
-package com.example.tourapp.Activity;
+package com.example.tourapp.Domain;
 
 public class BookingModel {
     public String id;
