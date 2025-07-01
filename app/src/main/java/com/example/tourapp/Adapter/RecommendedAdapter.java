@@ -46,6 +46,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         holder.bedCountTxt.setText("Beds: " + item.getBed());
         holder.tourGuideNameTxt.setText("Guide: " + item.getTourGuideName());
         holder.scoreTxt.setText(String.format("%.1f", item.getScore()));
+        holder.dateTourTxt.setText("Date: " + item.getDateTour() + " | Time: " + item.getTimeTour());
 
         Glide.with(context).load(item.getPic()).into(holder.pic);
         Glide.with(context).load(item.getTourGuidePic()).into(holder.tourGuidePic);
@@ -63,6 +64,8 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
             intent.putExtra("score", item.getScore());
             intent.putExtra("pic", item.getPic());
             intent.putExtra("tourGuidePic", item.getTourGuidePic());
+            intent.putExtra("dateTour", item.getDateTour()); // ✅ Send date to DetailActivity
+            intent.putExtra("timeTour", item.getTimeTour()); // ✅ Send time to DetailActivity
 
             context.startActivity(intent);
         });
@@ -81,7 +84,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
 
     public static class RecommendedViewHolder extends RecyclerView.ViewHolder {
         ShapeableImageView pic, tourGuidePic;
-        TextView titleTxt, addressTxt, priceTxt, durationTxt, bedCountTxt, tourGuideNameTxt, scoreTxt;
+        TextView titleTxt, addressTxt, priceTxt, durationTxt, bedCountTxt, tourGuideNameTxt, scoreTxt, dateTourTxt;
 
         public RecommendedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,6 +97,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
             tourGuideNameTxt = itemView.findViewById(R.id.tourGuideNameTxt);
             scoreTxt = itemView.findViewById(R.id.scoreTxt);
             tourGuidePic = itemView.findViewById(R.id.tourGuidePic);
+            dateTourTxt = itemView.findViewById(R.id.dateTourTxt); // ✅ Bind date TextView
         }
     }
 }

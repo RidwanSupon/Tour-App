@@ -20,13 +20,17 @@ public class TripItem {
     private String timeTour;
     private String tourGuidePhone;
 
+    // নতুন timestamp ফিল্ড
+    private long timestamp;
+
     public TripItem() {
         // Default constructor required for DataSnapshot.getValue(TripItem.class)
     }
 
     public TripItem(int id, String title, String address, int price, String duration, int bed,
                     String tourGuideName, double score, String pic, String tourGuidePic,
-                    String dateTour, String description, String distance, String timeTour, String tourGuidePhone) {
+                    String dateTour, String description, String distance, String timeTour,
+                    String tourGuidePhone, long timestamp) {
         this.id = id;
         this.title = title;
         this.address = address;
@@ -42,9 +46,10 @@ public class TripItem {
         this.distance = distance;
         this.timeTour = timeTour;
         this.tourGuidePhone = tourGuidePhone;
+        this.timestamp = timestamp;
     }
 
-    // ✅ Getters
+    // Getters
 
     public int getId() { return id; }
     public String getTitle() { return title; }
@@ -61,8 +66,9 @@ public class TripItem {
     public String getDistance() { return distance; }
     public String getTimeTour() { return timeTour; }
     public String getTourGuidePhone() { return tourGuidePhone; }
+    public long getTimestamp() { return timestamp; }
 
-    // ✅ Setters (Optional, but recommended for Firebase)
+    // Setters
 
     public void setId(int id) { this.id = id; }
     public void setTitle(String title) { this.title = title; }
@@ -79,4 +85,5 @@ public class TripItem {
     public void setDistance(String distance) { this.distance = distance; }
     public void setTimeTour(String timeTour) { this.timeTour = timeTour; }
     public void setTourGuidePhone(String tourGuidePhone) { this.tourGuidePhone = tourGuidePhone; }
+    public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
 }

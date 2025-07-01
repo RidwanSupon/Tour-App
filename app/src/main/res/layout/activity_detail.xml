@@ -74,32 +74,42 @@
             app:layout_constraintStart_toEndOf="@id/locationIcon"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Bed Count -->
+        <!-- Tour Date -->
+
+        <TextView
+            android:id="@+id/dateTimeTourTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date: -- | Time: --"
+            android:textColor="@color/darkBlue"
+            android:textSize="13sp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/bedCountTxt"
+            app:layout_constraintStart_toStartOf="parent"/>
+
         <TextView
             android:id="@+id/bedCountTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
             android:text="Beds: 3"
             android:textColor="@color/darkBlue"
             android:textSize="14sp"
-            android:layout_marginTop="14dp"
-            app:layout_constraintTop_toBottomOf="@id/addressTxt"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addressTxt" />
 
-        <!-- Duration -->
         <TextView
             android:id="@+id/durationTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:text="1D / 1N"
             android:textColor="@color/darkBlue"
             android:textSize="14sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="14dp"
-            app:layout_constraintTop_toBottomOf="@id/addressTxt"
-            app:layout_constraintStart_toEndOf="@id/bedCountTxt" />
+            app:layout_constraintStart_toEndOf="@id/bedCountTxt"
+            app:layout_constraintTop_toTopOf="@+id/bedCountTxt" />
 
-        <!-- Price -->
         <TextView
             android:id="@+id/priceTxt"
             android:layout_width="wrap_content"
@@ -113,27 +123,31 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Divider -->
+
+        <!-- Tour Guide Picture -->
+
+        <!-- Tour Guide Name -->
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="#e0e0e0"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/bedCountTxt"
+            android:background="#e0e0e0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/bedCountTxt" />
 
-        <!-- Tour Guide Picture -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/tourGuidePic"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="44dp"
             android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/roundedCorner"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bedCountTxt"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:shapeAppearanceOverlay="@style/roundedCorner" />
 
-        <!-- Tour Guide Name -->
         <TextView
             android:id="@+id/tourGuideNameTxt"
             android:layout_width="0dp"
@@ -149,27 +163,32 @@
             app:layout_constraintEnd_toStartOf="@id/starIcon" />
 
         <!-- Score and Star -->
+
+        <!-- Book Now Button -->
+
         <ImageView
             android:id="@+id/starIcon"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            app:srcCompat="@drawable/star"
-            app:layout_constraintTop_toTopOf="@id/tourGuidePic"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toStartOf="@id/scoreTxt"
-            android:layout_marginEnd="4dp" />
+            app:layout_constraintTop_toTopOf="@id/tourGuidePic"
+            app:srcCompat="@drawable/star" />
 
         <TextView
             android:id="@+id/scoreTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="4dp"
             android:text="4.5"
             android:textColor="@color/darkBlue"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="@id/tourGuidePic"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tourGuidePic" />
 
-        <!-- Book Now Button -->
         <Button
             android:id="@+id/bookNowBtn"
             android:layout_width="0dp"

@@ -3,7 +3,7 @@ package com.example.tourapp.Domain;
 public class RecommendedItem {
     private String title;
     private String address;
-    private int bed;  // ✅ fixed name (was: bedCount)
+    private int bed;
     private String duration;
     private double score;
     private int price;
@@ -13,14 +13,17 @@ public class RecommendedItem {
     private String description;
     private String tourGuidePhone;
 
-    // 🔸 No-arg constructor for Firebase
+    private String dateTour;  // Firebase ডাটার dateTour ফিল্ডের জন্য
+    private String timeTour;  // Firebase ডাটার timeTour ফিল্ডের জন্য
+
+    // No-arg constructor for Firebase
     public RecommendedItem() {
     }
 
-    // 🔸 All-arg constructor (optional)
+    // All-arg constructor
     public RecommendedItem(String title, String address, int bed, String duration, double score,
-                           int price, String pic, String tourGuideName, String tourGuidePic, String description,
-                           String tourGuidePhone) {
+                           int price, String pic, String tourGuideName, String tourGuidePic,
+                           String description, String tourGuidePhone, String dateTour, String timeTour) {
         this.title = title;
         this.address = address;
         this.bed = bed;
@@ -32,9 +35,11 @@ public class RecommendedItem {
         this.tourGuidePic = tourGuidePic;
         this.description = description;
         this.tourGuidePhone = tourGuidePhone;
+        this.dateTour = dateTour;
+        this.timeTour = timeTour;
     }
 
-    // 🔸 Getters
+    // Getters
     public String getTitle() {
         return title;
     }
@@ -79,7 +84,15 @@ public class RecommendedItem {
         return tourGuidePhone;
     }
 
-    // 🔸 Setters
+    public String getDateTour() {
+        return dateTour;
+    }
+
+    public String getTimeTour() {
+        return timeTour;
+    }
+
+    // Setters
     public void setTitle(String title) {
         this.title = title;
     }
@@ -123,4 +136,13 @@ public class RecommendedItem {
     public void setTourGuidePhone(String tourGuidePhone) {
         this.tourGuidePhone = tourGuidePhone;
     }
+
+    public void setDateTour(String dateTour) {
+        this.dateTour = dateTour;
+    }
+
+    public void setTimeTour(String timeTour) {
+        this.timeTour = timeTour;
+    }
+
 }

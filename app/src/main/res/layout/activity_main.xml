@@ -1,87 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="24sp"
     tools:context=".Activity.MainActivity">
 
+    <!-- 🔍 Search Bar Fixed -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="4dp"
+        android:backgroundTint="@android:color/white">
+
+        <EditText
+            android:id="@+id/editTextText4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/search_icon"
+            android:drawablePadding="12dp"
+            android:hint="@string/address_city"
+            android:inputType="text"
+            android:paddingStart="20dp"
+
+            android:paddingEnd="20dp"
+            android:textColor="@color/darkBlue"
+            android:textSize="16sp"
+            android:background="@android:color/transparent" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- 🔽 Scrollable Content -->
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="100dp">
+            android:paddingBottom="100dp"
+            android:paddingTop="8dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="48dp">
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.78"
-                    app:srcCompat="@drawable/bell_icon" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="28dp"
-                    android:text="Location"
-                    android:textColor="@color/darkBlue"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.51" />
-
-                <Spinner
-                    android:id="@+id/locationSp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_margin="16dp"
-                app:cardCornerRadius="28dp"
-                app:cardElevation="4dp"
-                android:backgroundTint="@android:color/white">
-
-                <EditText
-                    android:id="@+id/editTextText4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableStart="@drawable/search_icon"
-                    android:drawablePadding="12dp"
-                    android:hint="@string/address_city"
-                    android:inputType="text"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:textColor="@color/darkBlue"
-                    android:textSize="16sp"
-                    android:background="@android:color/transparent" />
-            </com.google.android.material.card.MaterialCardView>
-
+            <!-- 🔄 Banner Slider -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -92,10 +59,8 @@
                     android:layout_height="160dp"
                     android:paddingStart="24dp"
                     android:paddingEnd="24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
+                    tools:ignore="MissingConstraints" />
 
                 <ProgressBar
                     android:id="@+id/progressBarBanner"
@@ -106,9 +71,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- 📁 Category -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -119,11 +84,7 @@
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
                     android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:paddingEnd="16dp" />
 
                 <ProgressBar
                     android:id="@+id/progressBarCategory"
@@ -136,6 +97,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- 🔥 Popular -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -170,11 +132,7 @@
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
                     android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:paddingEnd="16dp" />
 
                 <ProgressBar
                     android:id="@+id/progressBarPopular"
@@ -187,6 +145,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- 🌟 Recommended -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -220,11 +179,7 @@
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
                     android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:paddingEnd="16dp" />
 
                 <ProgressBar
                     android:id="@+id/progressBarRecommended"
@@ -240,9 +195,10 @@
         </LinearLayout>
     </ScrollView>
 
+    <!-- ⬇ Bottom Navigation -->
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:layout_width="match_parent"
         android:id="@+id/chipNavigationBar"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/white"
         app:cnb_menuResource="@menu/menu_bottom"
@@ -252,9 +208,5 @@
         app:cnb_iconColor="@color/darkBlue"
         app:cnb_radius="50dp"
         app:cnb_orientationMode="horizontal"
-        app:cnb_unselectedColor="@color/darkBlue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:cnb_unselectedColor="@color/darkBlue" />
+</LinearLayout>

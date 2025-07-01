@@ -101,48 +101,48 @@ public class MainActivity extends AppCompatActivity {
 
         // যদি আগের button2.setOnClickListener থাকে, সেটা ডিলিট করো
 
-        initLocations();
+        //initLocations();
         initBanners();
         initCategory();
         initPopular();
         initRecommended();
     }
 
-    private void initLocations() {
-        DatabaseReference ref = database.getReference("Location");
-
-        binding.locationSp.setEnabled(false); // ডেটা আসা পর্যন্ত disable রাখবে
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<String> cities = new ArrayList<>();
-                if (snapshot.exists()) {
-                    for (DataSnapshot data : snapshot.getChildren()) {
-                        LocationModel location = data.getValue(LocationModel.class);
-                        if (location != null && location.getLoc() != null && !location.getLoc().isEmpty()) {
-                            cities.add(location.getLoc());
-                        }
-                    }
-                }
-                if (!cities.isEmpty()) {
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
-                            android.R.layout.simple_spinner_item, cities);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    binding.locationSp.setAdapter(adapter);
-                    binding.locationSp.setEnabled(true);
-                } else {
-                    binding.locationSp.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivity.this, "Failed to load locations.", Toast.LENGTH_SHORT).show();
-                binding.locationSp.setEnabled(true);
-            }
-        });
-    }
+//    private void initLocations() {
+//        DatabaseReference ref = database.getReference("Location");
+//
+//        binding.locationSp.setEnabled(false); // ডেটা আসা পর্যন্ত disable রাখবে
+//
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                ArrayList<String> cities = new ArrayList<>();
+//                if (snapshot.exists()) {
+//                    for (DataSnapshot data : snapshot.getChildren()) {
+//                        LocationModel location = data.getValue(LocationModel.class);
+//                        if (location != null && location.getLoc() != null && !location.getLoc().isEmpty()) {
+//                            cities.add(location.getLoc());
+//                        }
+//                    }
+//                }
+//                if (!cities.isEmpty()) {
+//                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
+//                            android.R.layout.simple_spinner_item, cities);
+//                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    binding.locationSp.setAdapter(adapter);
+//                    binding.locationSp.setEnabled(true);
+//                } else {
+//                    binding.locationSp.setEnabled(true);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(MainActivity.this, "Failed to load locations.", Toast.LENGTH_SHORT).show();
+//                binding.locationSp.setEnabled(true);
+//            }
+//        });
+//    }
 
     private void banners(ArrayList<SliderItems> items) {
         binding.viewPager2.setAdapter(new SliderAdapter(items, binding.viewPager2));

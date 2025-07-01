@@ -39,29 +39,38 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.TripViewHolder
     public void onBindViewHolder(@NonNull TripViewHolder holder, int position) {
         TripItem item = itemList.get(position);
 
-        // Bind data
+        // Combine date and time for display (example: "2025-07-01 - 10:00 AM")
+        String tourDateTime = item.getDateTour() + " - " + item.getTimeTour();
+
+        // Bind data to UI elements
         holder.tvTitle.setText(item.getTitle());
-        holder.tvDateTime.setText(item.getDateTour() + " - " + item.getTimeTour());
+        holder.tvDateTime.setText(tourDateTime);
         holder.tvBedRoom.setText("Beds: " + item.getBed());
         holder.tvDistanceDuration.setText(item.getDistance() + " | " + item.getDuration());
 
-        // Launch DetailActivity on click
+        // On clicking the Book Now button, launch DetailActivity with all data
         holder.btnBookNow.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
 
-            // Pass all the needed fields into the Intent
-            intent.putExtra("title",           item.getTitle());
-            intent.putExtra("description",     item.getDescription());
-            intent.putExtra("address",         item.getAddress());
-            intent.putExtra("bedCount",        item.getBed());
-            intent.putExtra("duration",        item.getDuration());
-            intent.putExtra("price",           item.getPrice());
-            intent.putExtra("tourGuideName",   item.getTourGuideName());
-            intent.putExtra("score",           item.getScore());
-            intent.putExtra("pic",             item.getPic());
-            intent.putExtra("tourGuidePic",    item.getTourGuidePic());
-            intent.putExtra("tourGuidePhone",  item.getTourGuidePhone());
-            intent.putExtra("timeTour",        item.getTimeTour());
+            // Pass all necessary details separately
+            intent.putExtra("title", item.getTitle());
+            intent.putExtra("description", item.getDescription());
+            intent.putExtra("address", item.getAddress());
+            intent.putExtra("bedCount", item.getBed());
+            intent.putExtra("duration", item.getDuration());
+            intent.putExtra("price", item.getPrice());
+            intent.putExtra("tourGuideName", item.getTourGuideName());
+            intent.putExtra("score", item.getScore());
+            intent.putExtra("pic", item.getPic());
+            intent.putExtra("tourGuidePic", item.getTourGuidePic());
+            intent.putExtra("tourGuidePhone", item.getTourGuidePhone());
+
+            // Pass date and time separately for easier handling in DetailActivity
+            intent.putExtra("dateTour", item.getDateTour());
+            intent.putExtra("timeTour", item.getTimeTour());
+
+            // ✅ Pass the timestamp here
+            intent.putExtra("timestamp", item.getTimestamp());
 
             context.startActivity(intent);
         });
@@ -78,11 +87,11 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.TripViewHolder
 
         TripViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle             = itemView.findViewById(R.id.tvTitle);
-            tvDateTime          = itemView.findViewById(R.id.tvDateTime);
-            tvBedRoom           = itemView.findViewById(R.id.tvBedRoom);
-            tvDistanceDuration  = itemView.findViewById(R.id.tvDistanceDuration);
-            btnBookNow          = itemView.findViewById(R.id.btnBookNow);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvDateTime = itemView.findViewById(R.id.tvDateTime);
+            tvBedRoom = itemView.findViewById(R.id.tvBedRoom);
+            tvDistanceDuration = itemView.findViewById(R.id.tvDistanceDuration);
+            btnBookNow = itemView.findViewById(R.id.btnBookNow);
         }
     }
 }

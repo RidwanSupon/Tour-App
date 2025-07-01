@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="280dp"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     android:background="@drawable/white_bg"
     android:elevation="6dp"
@@ -21,7 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:shapeAppearanceOverlay="@style/roundedCorner"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
 
     <!-- Title -->
     <TextView
@@ -82,6 +81,18 @@
         app:layout_constraintTop_toTopOf="@id/bedCountTxt"
         app:layout_constraintStart_toEndOf="@id/bedCountTxt" />
 
+    <!-- Date Tour -->
+    <TextView
+        android:id="@+id/dateTourTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Date: 1 July 2025"
+        android:textColor="@color/darkBlue"
+        android:textSize="13sp"
+        app:layout_constraintTop_toBottomOf="@id/bedCountTxt"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <!-- Price -->
     <TextView
         android:id="@+id/priceTxt"
@@ -95,7 +106,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tourGuideNameTxt"
-        app:layout_constraintTop_toTopOf="@id/bedCountTxt"
+        app:layout_constraintTop_toTopOf="@id/dateTourTxt"
         app:layout_constraintVertical_bias="0.439" />
 
     <!-- Tour Guide Info -->
@@ -136,7 +147,7 @@
         android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bedCountTxt"
+        app:layout_constraintTop_toBottomOf="@id/dateTourTxt"
         app:shapeAppearanceOverlay="@style/roundedCorner"
         tools:srcCompat="@tools:sample/avatars" />
 

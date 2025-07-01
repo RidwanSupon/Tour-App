@@ -30,15 +30,13 @@ import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
 
-    // UI references
     private ShapeableImageView tripImage, guideImage;
     private TextView titleText, descText, addressText, bedsText, durationText,
-            priceText, guideNameText, ratingText;
+            priceText, guideNameText, ratingText, tourDateText;
     private Button startBookingBtn, submitBookingBtn, showPartnersBtn;
     private LinearLayout bookingForm;
     private EditText nameInput, phoneInput, peopleInput, childInput;
 
-    // Trip data
     private String tripTitle = "";
     private int tripPrice = 0;
 
@@ -48,7 +46,6 @@ public class DetailActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detail);
 
-        // Apply system window insets as padding
         ViewCompat.setOnApplyWindowInsetsListener(
                 findViewById(R.id.main),
                 (v, insets) -> {
@@ -69,6 +66,7 @@ public class DetailActivity extends AppCompatActivity {
         priceText        = findViewById(R.id.priceTxt);
         guideNameText    = findViewById(R.id.tourGuideNameTxt);
         ratingText       = findViewById(R.id.scoreTxt);
+        tourDateText     = findViewById(R.id.dateTimeTourTxt);   // Date + Time display
 
         startBookingBtn  = findViewById(R.id.bookNowBtn);
         submitBookingBtn = findViewById(R.id.submitBookingBtn);
@@ -80,7 +78,6 @@ public class DetailActivity extends AppCompatActivity {
         peopleInput      = findViewById(R.id.totalPeopleInput);
         childInput       = findViewById(R.id.childInput);
 
-        // Retrieve data from Intent
         Intent intent = getIntent();
         if (intent != null) {
             tripTitle  = intent.getStringExtra("title");
@@ -98,17 +95,31 @@ public class DetailActivity extends AppCompatActivity {
                             intent.getDoubleExtra("score",0))
             );
 
+            // Combine Date + Time from Intent
+            String dateTour = intent.getStringExtra("dateTour");
+            String timeTour = intent.getStringExtra("timeTour");  // Correct key
+
+            if ((dateTour != null && !dateTour.isEmpty()) || (timeTour != null && !timeTour.isEmpty())) {
+                String showDateTime = "Tour Date & Time: ";
+                if (dateTour != null && !dateTour.isEmpty()) showDateTime += dateTour;
+                if (timeTour != null && !timeTour.isEmpty()) showDateTime += " at " + timeTour;
+
+                tourDateText.setText(showDateTime);
+            } else {
+                tourDateText.setText("Tour Date & Time: N/A");
+            }
+
             Glide.with(this).load(intent.getStringExtra("pic")).into(tripImage);
             Glide.with(this).load(intent.getStringExtra("tourGuidePic")).into(guideImage);
         }
 
-        // Show booking form
+        // Booking button click
         startBookingBtn.setOnClickListener(v -> {
             bookingForm.setVisibility(View.VISIBLE);
             startBookingBtn.setVisibility(View.GONE);
         });
 
-        // On “Submit Booking”, show dummy payment dialog
+        // Submit booking click
         submitBookingBtn.setOnClickListener(v -> {
             String name   = nameInput.getText().toString().trim();
             String phone  = phoneInput.getText().toString().trim();
@@ -123,8 +134,8 @@ public class DetailActivity extends AppCompatActivity {
             int adults = Integer.parseInt(people);
             int kids   = child.isEmpty() ? 0 : Integer.parseInt(child);
 
-            int adultTotal = (int)(tripPrice * adults * 0.5);
-            int childTotal = (int)(tripPrice * 0.2 * kids);
+            int adultTotal = tripPrice * adults;
+            int childTotal = (int)(tripPrice * 0.5 * kids);
             int totalAmt   = adultTotal + childTotal;
 
             View payView     = getLayoutInflater().inflate(R.layout.dialog_payment,null);
@@ -152,17 +163,12 @@ public class DetailActivity extends AppCompatActivity {
             payDlg.show();
         });
 
-        // Show tour partners
+        // Show booked tour partners
         showPartnersBtn.setOnClickListener(v -> showTourPartnersDialog(tripTitle));
     }
 
-    private void saveBookingToFirebase(
-            String name, String phone,
-            int adults, int children,
-            int totalAmount
-    ) {
-        DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReference("Bookings");
+    private void saveBookingToFirebase(String name, String phone, int adults, int children, int totalAmount) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Bookings");
         String bookingId = ref.push().getKey();
         String userId    = FirebaseAuth.getInstance().getCurrentUser() != null
                 ? FirebaseAuth.getInstance().getCurrentUser().getUid()
@@ -200,8 +206,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void showTourPartnersDialog(String title) {
-        DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReference("Bookings");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Bookings");
         ref.orderByChild("tripTitle").equalTo(title)
                 .addListenerForSingleValueEvent(
                         new com.google.firebase.database.ValueEventListener() {
