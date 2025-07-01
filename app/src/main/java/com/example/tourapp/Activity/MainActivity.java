@@ -4,6 +4,7 @@ import com.example.tourapp.Adapter.CategoryAdapter;
 import com.example.tourapp.Adapter.PopularAdapter;
 import com.example.tourapp.Adapter.RecommendedAdapter;
 import com.example.tourapp.Adapter.SliderAdapter;
+import com.example.tourapp.Domain.LocationModel;
 import com.example.tourapp.Domain.PopularItem;
 import com.example.tourapp.Domain.RecommendedItem;
 import com.example.tourapp.Domain.SliderItems;
@@ -15,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.example.tourapp.R;
+import android.widget.Toast;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -87,23 +89,43 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initLocations() {
-        ArrayList<String> cities = new ArrayList<>();
-        cities.add("Dhaka");
-        cities.add("CoxsBazar");
-        cities.add("Barishal");
-        cities.add("Cumilla");
-        cities.add("Chattogram");
-        cities.add("Khulna");
-        cities.add("Rajshahi");
-        cities.add("Sylhet");
-        cities.add("Rangpur");
-        cities.add("Mymensingh");
+        DatabaseReference ref = database.getReference("Location");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
-                android.R.layout.simple_spinner_item, cities);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.locationSp.setAdapter(adapter);
+        binding.locationSp.setEnabled(false); // ডেটা আসা পর্যন্ত disable রাখবে
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<String> cities = new ArrayList<>();
+                if (snapshot.exists()) {
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        LocationModel location = data.getValue(LocationModel.class);
+                        if (location != null && location.getLoc() != null && !location.getLoc().isEmpty()) {
+                            cities.add(location.getLoc());
+                        }
+                    }
+                }
+                if (!cities.isEmpty()) {
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
+                            android.R.layout.simple_spinner_item, cities);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    binding.locationSp.setAdapter(adapter);
+                    binding.locationSp.setEnabled(true);
+                } else {
+                    // কোনো ডাটা না থাকলে স্পিনার Enable করে দাও
+                    binding.locationSp.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "Failed to load locations.", Toast.LENGTH_SHORT).show();
+                binding.locationSp.setEnabled(true);
+            }
+        });
     }
+
+
 
     private void banners(ArrayList<SliderItems> items) {
         binding.viewPager2.setAdapter(new SliderAdapter(items, binding.viewPager2));

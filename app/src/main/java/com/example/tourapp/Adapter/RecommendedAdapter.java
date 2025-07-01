@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.tourapp.Domain.RecommendedItem;
 import com.example.tourapp.Activity.DetailActivity;
+// DetailActivity ইমপোর্ট করতে ভুলবেন না
 import com.example.tourapp.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -43,7 +44,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         holder.addressTxt.setText(item.getAddress());
         holder.priceTxt.setText("৳" + item.getPrice());
         holder.durationTxt.setText(item.getDuration());
-        holder.bedCountTxt.setText("Beds: " + item.getBedCount());
+        holder.bedCountTxt.setText("Beds: " + item.getBed());
         holder.tourGuideNameTxt.setText("Guide: " + item.getTourGuideName());
         holder.scoreTxt.setText(String.format("%.1f", item.getScore()));
 
@@ -58,16 +59,13 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
             intent.putExtra("title", item.getTitle());
             intent.putExtra("description", item.getDescription());
             intent.putExtra("address", item.getAddress());
-            intent.putExtra("bedCount", item.getBedCount());
+            intent.putExtra("bedCount", item.getBed());
             intent.putExtra("duration", item.getDuration());
             intent.putExtra("price", item.getPrice());
             intent.putExtra("tourGuideName", item.getTourGuideName());
             intent.putExtra("score", item.getScore());
             intent.putExtra("pic", item.getPic());
             intent.putExtra("tourGuidePic", item.getTourGuidePic());
-
-            // নতুন: tourGuidePhone পাস করো
-            intent.putExtra("tourGuidePhone", item.getTourGuidePhone());
 
             context.startActivity(intent);
         });

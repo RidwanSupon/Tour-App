@@ -161,6 +161,20 @@
       "neededBedOrRoom": "Room",
       "timestamp": "2025-06-30T22:00:00Z"
     }
-  ]
+  ],
+"Bookmarks": {
+  "abc123xyz": {
+    "-Nx1aB2cd3EfGhIj": {
+      "title": "কক্সবাজার সমুদ্র সৈকত",
+      "address": "কক্সবাজার, বাংলাদেশ",
+      "bed": 3,
+      "duration": "৩ দিন / ২ রাত",
+      "pic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897640/location_1_psppir.jpg",
+      "price": 15000,
+      "score": 4.8,
+      "tourGuideName": "সুমাইয়া আক্তার",
+      "tourGuidePic": "https://res.cloudinary.com/dkikc5ywq/image/upload/v1744897672/profile_wxamui.png"
+    }
+  }
 }
 

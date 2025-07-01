@@ -1,171 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="320dp"
-    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:padding="10dp"
     android:background="@drawable/white_bg"
-    android:elevation="3dp">
+    android:elevation="6dp">
 
+    <!-- Main Image -->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/pic"
-        android:layout_width="125dp"
-        android:layout_height="85dp"
-        android:layout_margin="8dp"
-        android:layout_marginStart="52dp"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/roundedCorner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
+    <!-- Title -->
     <TextView
         android:id="@+id/titleTxt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
-        android:text="title"
+        android:layout_marginTop="8dp"
+        android:text="Trip Title"
         android:textColor="@color/darkBlue"
-        android:textSize="15sp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/pic"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/pic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="12dp"
-        android:text=""
-        android:textColor="@color/darkBlue"
-        app:layout_constraintBottom_toTopOf="@+id/tourGuideNameTxt"
-        app:layout_constraintStart_toEndOf="@+id/priceTxt" />
+    <!-- Location icon + Address -->
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="4dp"
+        app:srcCompat="@drawable/location"
+        app:layout_constraintTop_toBottomOf="@id/titleTxt"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/addressTxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Location Address"
+        android:textColor="@color/darkBlue"
+        android:textSize="13sp"
+        app:layout_constraintTop_toTopOf="@id/imageView4"
+        app:layout_constraintStart_toEndOf="@id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Beds & Duration -->
+    <TextView
+        android:id="@+id/bedCountTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="address"
+        android:layout_marginTop="6dp"
+        android:text="Beds: 3"
         android:textColor="@color/darkBlue"
-        app:layout_constraintBottom_toTopOf="@+id/priceTxt"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/titleTxt"
-        app:layout_constraintVertical_bias="0.145" />
+        android:textSize="13sp"
+        app:layout_constraintTop_toBottomOf="@id/addressTxt"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/durationTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:text="1D / 1N"
         android:textColor="@color/darkBlue"
         android:textSize="13sp"
-        app:layout_constraintStart_toEndOf="@+id/bedCountTxt"
-        app:layout_constraintTop_toTopOf="@+id/bedCountTxt" />
+        app:layout_constraintTop_toTopOf="@id/bedCountTxt"
+        app:layout_constraintStart_toEndOf="@id/bedCountTxt" />
 
+    <!-- Price -->
+    <TextView
+        android:id="@+id/priceTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="৳199"
+        android:textColor="@color/purple"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/bedCountTxt"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Tour Guide Picture -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/tourGuidePic"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/roundedCorner"
+        app:layout_constraintTop_toBottomOf="@id/bedCountTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <!-- Tour Guide Name -->
     <TextView
         android:id="@+id/tourGuideNameTxt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="6dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="Guide: Tina Anderson"
         android:textColor="@color/darkBlue"
         android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tourGuidePic"
-        app:layout_constraintEnd_toStartOf="@+id/tourGuidePic"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/titleTxt"
-        app:layout_constraintTop_toTopOf="@+id/tourGuidePic"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@id/tourGuidePic"
+        app:layout_constraintBottom_toBottomOf="@id/tourGuidePic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tourGuidePic" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/tourGuidePic"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pic"
-        app:layout_constraintVertical_bias="0.0"
-        app:shapeAppearanceOverlay="@style/roundedCorner"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-    <TextView
-        android:id="@+id/bedCountTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Beds: 3"
-        android:textColor="@color/darkBlue"
-        android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="@+id/titleTxt"
-        app:layout_constraintTop_toBottomOf="@+id/addressTxt" />
-
-    <TextView
-        android:id="@+id/priceTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="$0"
-        android:textColor="@color/purple"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView7"
-        app:layout_constraintStart_toEndOf="@+id/pic" />
-
-    <!-- New views with constraints added -->
+    <!-- Star icon + Score -->
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/imageView5"
+        android:layout_width="16dp"
+        android:layout_height="18dp"
         android:layout_marginEnd="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/priceTxt"
-        app:layout_constraintEnd_toEndOf="@+id/priceTxt"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/bedCountTxt"
-        app:layout_constraintTop_toBottomOf="@+id/titleTxt"
-        app:layout_constraintVertical_bias="0.196"
-        app:srcCompat="@drawable/location" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/tourGuidePic"
+        app:layout_constraintEnd_toStartOf="@+id/scoreTxt"
+        app:srcCompat="@drawable/star" />
 
     <TextView
         android:id="@+id/scoreTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="5"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="8dp"
+        android:text="5.0"
         android:textColor="@color/darkBlue"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tourGuidePic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addressTxt"
-        app:layout_constraintVertical_bias="0.477" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="14dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/scoreTxt"
-        app:layout_constraintTop_toBottomOf="@+id/titleTxt"
-        app:layout_constraintVertical_bias="0.431"
-        app:srcCompat="@drawable/star" />
+        app:layout_constraintBottom_toBottomOf="@id/tourGuidePic"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

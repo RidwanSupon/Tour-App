@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
             priceText, guideNameText, ratingText;
     private Button startBookingBtn, submitBookingBtn, showPartnersBtn;
     private LinearLayout bookingForm;
-    private EditText nameInput, phoneInput, peopleInput, childInput, roomInput;
+    private EditText nameInput, phoneInput, peopleInput, childInput;
 
     // Trip data
     private String tripTitle = "";
@@ -79,7 +79,6 @@ public class DetailActivity extends AppCompatActivity {
         phoneInput       = findViewById(R.id.contactNumberInput);
         peopleInput      = findViewById(R.id.totalPeopleInput);
         childInput       = findViewById(R.id.childInput);
-        roomInput        = findViewById(R.id.bedRoomInput);
 
         // Retrieve data from Intent
         Intent intent = getIntent();
@@ -115,23 +114,19 @@ public class DetailActivity extends AppCompatActivity {
             String phone  = phoneInput.getText().toString().trim();
             String people = peopleInput.getText().toString().trim();
             String child  = childInput.getText().toString().trim();
-            String room   = roomInput.getText().toString().trim();
 
             if (name.isEmpty() || phone.isEmpty() || people.isEmpty()) {
                 Toast.makeText(this,"Please fill required fields",Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // parse counts
             int adults = Integer.parseInt(people);
-            int kids   = child.isEmpty()?0:Integer.parseInt(child);
+            int kids   = child.isEmpty() ? 0 : Integer.parseInt(child);
 
-            // calculate totals
-            int adultTotal = tripPrice * adults;
-            int childTotal = (int)(tripPrice * 0.5 * kids);
+            int adultTotal = (int)(tripPrice * adults * 0.5);
+            int childTotal = (int)(tripPrice * 0.2 * kids);
             int totalAmt   = adultTotal + childTotal;
 
-            // Inflate and show payment dialog
             View payView     = getLayoutInflater().inflate(R.layout.dialog_payment,null);
             EditText etCard  = payView.findViewById(R.id.etCardNumber);
             EditText etPin   = payView.findViewById(R.id.etPin);
@@ -146,12 +141,12 @@ public class DetailActivity extends AppCompatActivity {
             payView.findViewById(R.id.btnPayNow).setOnClickListener(pd -> {
                 String card = etCard.getText().toString().trim();
                 String pin  = etPin.getText().toString().trim();
-                if (card.length()<12 || pin.length()<4) {
+                if (card.length() < 12 || pin.length() < 4) {
                     Toast.makeText(this,"Invalid card number or PIN",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 payDlg.dismiss();
-                saveBookingToFirebase(name,phone,adults,kids,room,totalAmt);
+                saveBookingToFirebase(name, phone, adults, kids, totalAmt);
             });
 
             payDlg.show();
@@ -164,12 +159,12 @@ public class DetailActivity extends AppCompatActivity {
     private void saveBookingToFirebase(
             String name, String phone,
             int adults, int children,
-            String room, int totalAmount
+            int totalAmount
     ) {
         DatabaseReference ref = FirebaseDatabase.getInstance()
                 .getReference("Bookings");
         String bookingId = ref.push().getKey();
-        String userId    = FirebaseAuth.getInstance().getCurrentUser()!=null
+        String userId    = FirebaseAuth.getInstance().getCurrentUser() != null
                 ? FirebaseAuth.getInstance().getCurrentUser().getUid()
                 : "Unknown";
         long timestamp   = System.currentTimeMillis();
@@ -181,11 +176,9 @@ public class DetailActivity extends AppCompatActivity {
                 phone,
                 adults,
                 children,
-                room,
                 userId,
                 timestamp
         );
-        // if BookingModel had a totalAmount field, pass it in constructor
 
         ref.child(bookingId).setValue(booking)
                 .addOnSuccessListener(aVoid -> {
@@ -198,7 +191,6 @@ public class DetailActivity extends AppCompatActivity {
                     phoneInput.setText("");
                     peopleInput.setText("");
                     childInput.setText("");
-                    roomInput.setText("");
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this,
@@ -218,17 +210,18 @@ public class DetailActivity extends AppCompatActivity {
                                 ArrayList<String> names = new ArrayList<>();
                                 for (com.google.firebase.database.DataSnapshot c : snap.getChildren()) {
                                     String n = c.child("contactName").getValue(String.class);
-                                    if (n!=null) names.add(n);
+                                    if (n != null) names.add(n);
                                 }
                                 if (names.isEmpty()) {
                                     showAlert("Tour Partners",
-                                            "No bookings found for \""+title+"\"");
+                                            "No bookings found for \"" + title + "\"");
                                 } else {
                                     StringBuilder sb = new StringBuilder();
-                                    for (String n: names) sb.append("• ").append(n).append("\n");
-                                    showAlert("Tour Partners for \""+title+"\"", sb.toString());
+                                    for (String n : names) sb.append("• ").append(n).append("\n");
+                                    showAlert("Tour Partners for \"" + title + "\"", sb.toString());
                                 }
                             }
+
                             @Override
                             public void onCancelled(com.google.firebase.database.DatabaseError err) {
                                 Toast.makeText(DetailActivity.this,
@@ -243,7 +236,7 @@ public class DetailActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("OK",null)
+                .setPositiveButton("OK", null)
                 .show();
     }
 }
