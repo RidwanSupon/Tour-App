@@ -15,12 +15,12 @@
         app:cnb_backgroundColor="@color/purple"
         app:cnb_iconColor="@color/white" />
 
-    <item
-        android:id="@+id/bookmark"
-        android:icon="@drawable/bottom_btn3"
-        android:title="Bookmark"
-        app:cnb_backgroundColor="@color/purple"
-        app:cnb_iconColor="@color/white" />
+<!--    <item-->
+<!--        android:id="@+id/bookmark"-->
+<!--        android:icon="@drawable/bottom_btn3"-->
+<!--        android:title="Bookmark"-->
+<!--        app:cnb_backgroundColor="@color/purple"-->
+<!--        app:cnb_iconColor="@color/white" />-->
 
     <item
         android:id="@+id/cart"

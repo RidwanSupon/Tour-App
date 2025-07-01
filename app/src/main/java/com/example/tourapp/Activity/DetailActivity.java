@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,9 @@ public class DetailActivity extends AppCompatActivity {
     private LinearLayout bookingForm;
     private EditText nameInput, phoneInput, peopleInput, childInput;
 
+    private ImageView starIcon, locationIcon;
+    private View dividerLine;
+
     private String tripTitle = "";
     private int tripPrice = 0;
 
@@ -66,7 +70,7 @@ public class DetailActivity extends AppCompatActivity {
         priceText        = findViewById(R.id.priceTxt);
         guideNameText    = findViewById(R.id.tourGuideNameTxt);
         ratingText       = findViewById(R.id.scoreTxt);
-        tourDateText     = findViewById(R.id.dateTimeTourTxt);   // Date + Time display
+        tourDateText     = findViewById(R.id.dateTimeTourTxt);
 
         startBookingBtn  = findViewById(R.id.bookNowBtn);
         submitBookingBtn = findViewById(R.id.submitBookingBtn);
@@ -77,6 +81,10 @@ public class DetailActivity extends AppCompatActivity {
         phoneInput       = findViewById(R.id.contactNumberInput);
         peopleInput      = findViewById(R.id.totalPeopleInput);
         childInput       = findViewById(R.id.childInput);
+
+        starIcon         = findViewById(R.id.starIcon);
+        locationIcon     = findViewById(R.id.locationIcon);
+        dividerLine      = findViewById(R.id.dividerLine);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -90,20 +98,15 @@ public class DetailActivity extends AppCompatActivity {
             durationText.setText(intent.getStringExtra("duration"));
             priceText.setText("৳" + tripPrice);
             guideNameText.setText("Guide: " + intent.getStringExtra("tourGuideName"));
-            ratingText.setText(
-                    String.format(Locale.getDefault(),"%.1f",
-                            intent.getDoubleExtra("score",0))
-            );
+            ratingText.setText(String.format(Locale.getDefault(), "%.1f", intent.getDoubleExtra("score", 0)));
 
-            // Combine Date + Time from Intent
             String dateTour = intent.getStringExtra("dateTour");
-            String timeTour = intent.getStringExtra("timeTour");  // Correct key
+            String timeTour = intent.getStringExtra("timeTour");
 
             if ((dateTour != null && !dateTour.isEmpty()) || (timeTour != null && !timeTour.isEmpty())) {
                 String showDateTime = "Tour Date & Time: ";
                 if (dateTour != null && !dateTour.isEmpty()) showDateTime += dateTour;
                 if (timeTour != null && !timeTour.isEmpty()) showDateTime += " at " + timeTour;
-
                 tourDateText.setText(showDateTime);
             } else {
                 tourDateText.setText("Tour Date & Time: N/A");
@@ -113,13 +116,28 @@ public class DetailActivity extends AppCompatActivity {
             Glide.with(this).load(intent.getStringExtra("tourGuidePic")).into(guideImage);
         }
 
-        // Booking button click
         startBookingBtn.setOnClickListener(v -> {
-            bookingForm.setVisibility(View.VISIBLE);
+            tripImage.setVisibility(View.GONE);
+            guideImage.setVisibility(View.GONE);
+            titleText.setVisibility(View.GONE);
+            descText.setVisibility(View.GONE);
+            addressText.setVisibility(View.GONE);
+            bedsText.setVisibility(View.GONE);
+            durationText.setVisibility(View.GONE);
+            priceText.setVisibility(View.GONE);
+            guideNameText.setVisibility(View.GONE);
+            ratingText.setVisibility(View.GONE);
+            tourDateText.setVisibility(View.GONE);
             startBookingBtn.setVisibility(View.GONE);
+            showPartnersBtn.setVisibility(View.GONE);
+
+            starIcon.setVisibility(View.GONE);
+            locationIcon.setVisibility(View.GONE);
+            dividerLine.setVisibility(View.GONE);
+
+            bookingForm.setVisibility(View.VISIBLE);
         });
 
-        // Submit booking click
         submitBookingBtn.setOnClickListener(v -> {
             String name   = nameInput.getText().toString().trim();
             String phone  = phoneInput.getText().toString().trim();
@@ -146,7 +164,7 @@ public class DetailActivity extends AppCompatActivity {
 
             AlertDialog payDlg = new AlertDialog.Builder(this)
                     .setView(payView)
-                    .setCancelable(false)
+                    .setCancelable(true)
                     .create();
 
             payView.findViewById(R.id.btnPayNow).setOnClickListener(pd -> {
@@ -163,7 +181,6 @@ public class DetailActivity extends AppCompatActivity {
             payDlg.show();
         });
 
-        // Show booked tour partners
         showPartnersBtn.setOnClickListener(v -> showTourPartnersDialog(tripTitle));
     }
 
@@ -191,12 +208,19 @@ public class DetailActivity extends AppCompatActivity {
                     Toast.makeText(this,
                             "Booking confirmed! Thank you, " + name,
                             Toast.LENGTH_LONG).show();
+
                     bookingForm.setVisibility(View.GONE);
                     startBookingBtn.setVisibility(View.VISIBLE);
                     nameInput.setText("");
                     phoneInput.setText("");
                     peopleInput.setText("");
                     childInput.setText("");
+
+                    // Redirect to Home (MainActivity) after confirmation
+                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this,

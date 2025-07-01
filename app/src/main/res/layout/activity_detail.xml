@@ -129,6 +129,7 @@
         <!-- Tour Guide Name -->
 
         <View
+            android:id="@+id/dividerLine"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="32dp"
