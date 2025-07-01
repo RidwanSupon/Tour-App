@@ -59,47 +59,28 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_margin="16dp"
-                android:background="@drawable/grey_bg">
+                app:cardCornerRadius="28dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="@android:color/white">
 
                 <EditText
                     android:id="@+id/editTextText4"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="3dp"
-                    android:background="#00ffffff"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:drawableStart="@drawable/search_icon"
-                    android:drawablePadding="8dp"
-                    android:ems="10"
+                    android:drawablePadding="12dp"
                     android:hint="@string/address_city"
                     android:inputType="text"
-                    android:padding="8dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:textColor="@color/darkBlue"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/button2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button2"
-                    style="@android:style/Widget.Button"
-                    android:layout_width="100dp"
-                    android:layout_height="42dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="2dp"
-                    android:background="@drawable/purple_bg"
-                    android:text="Search"
-                    android:textColor="@color/LightGray"
-                    android:textSize="18dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

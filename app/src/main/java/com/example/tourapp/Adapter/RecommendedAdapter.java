@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.tourapp.Domain.RecommendedItem;
 import com.example.tourapp.Activity.DetailActivity;
-// DetailActivity ইমপোর্ট করতে ভুলবেন না
 import com.example.tourapp.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -51,11 +50,9 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         Glide.with(context).load(item.getPic()).into(holder.pic);
         Glide.with(context).load(item.getTourGuidePic()).into(holder.tourGuidePic);
 
-        // ক্লিক হ্যান্ডলার যোগ
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
 
-            // ডাটা পাস করো ইন্টেন্টে
             intent.putExtra("title", item.getTitle());
             intent.putExtra("description", item.getDescription());
             intent.putExtra("address", item.getAddress());
@@ -74,6 +71,12 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     @Override
     public int getItemCount() {
         return itemList.size();
+    }
+
+    // নতুন মেথড: লিস্ট আপডেট করার জন্য
+    public void updateList(List<RecommendedItem> newList) {
+        this.itemList = newList;
+        notifyDataSetChanged();
     }
 
     public static class RecommendedViewHolder extends RecyclerView.ViewHolder {

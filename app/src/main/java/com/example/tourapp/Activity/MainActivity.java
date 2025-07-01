@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
     private final Handler sliderHandler = new Handler();
 
+    // সার্চের জন্য পুরো Recommended লিস্ট রাখব এখানে
+    private ArrayList<RecommendedItem> recommendedListFull = new ArrayList<>();
+    private RecommendedAdapter recommendedAdapter;
+
     private final Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
@@ -80,13 +84,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // এখন TextWatcher দিয়ে auto search করবো
+        binding.editTextText4.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String query = s.toString().trim().toLowerCase();
+                filterRecommendedList(query);
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) { }
+        });
+
+        // যদি আগের button2.setOnClickListener থাকে, সেটা ডিলিট করো
+
         initLocations();
         initBanners();
         initCategory();
         initPopular();
         initRecommended();
     }
-
 
     private void initLocations() {
         DatabaseReference ref = database.getReference("Location");
@@ -112,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
                     binding.locationSp.setAdapter(adapter);
                     binding.locationSp.setEnabled(true);
                 } else {
-                    // কোনো ডাটা না থাকলে স্পিনার Enable করে দাও
                     binding.locationSp.setEnabled(true);
                 }
             }
@@ -124,8 +143,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void banners(ArrayList<SliderItems> items) {
         binding.viewPager2.setAdapter(new SliderAdapter(items, binding.viewPager2));
@@ -254,24 +271,24 @@ public class MainActivity extends AppCompatActivity {
         binding.progressBarRecommended.setVisibility(View.VISIBLE);
 
         DatabaseReference ref = database.getReference("Item");
-        ArrayList<RecommendedItem> list = new ArrayList<>();
+        recommendedListFull.clear();
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
+                recommendedListFull.clear();
                 if (snapshot.exists()) {
                     for (DataSnapshot data : snapshot.getChildren()) {
                         RecommendedItem item = data.getValue(RecommendedItem.class);
                         if (item != null) {
-                            list.add(item);
+                            recommendedListFull.add(item);
                         }
                     }
-                    if (!list.isEmpty()) {
+                    if (!recommendedListFull.isEmpty()) {
                         binding.recyclerViewRecommended.setLayoutManager(
                                 new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                        RecommendedAdapter adapter = new RecommendedAdapter(MainActivity.this, list);
-                        binding.recyclerViewRecommended.setAdapter(adapter);
+                        recommendedAdapter = new RecommendedAdapter(MainActivity.this, recommendedListFull);
+                        binding.recyclerViewRecommended.setAdapter(recommendedAdapter);
                     }
                 }
                 binding.progressBarRecommended.setVisibility(View.GONE);
@@ -283,6 +300,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    // সার্চ ফিল্টার মেথড
+    private void filterRecommendedList(String query) {
+        boolean isSearching = !query.trim().isEmpty();
+
+        // Banner এর parent ConstraintLayout (viewPager + progressBar)
+        View bannerParent = findViewById(R.id.viewPager2).getParent() instanceof View ? (View) findViewById(R.id.viewPager2).getParent() : null;
+        if (bannerParent != null) bannerParent.setVisibility(isSearching ? View.GONE : View.VISIBLE);
+
+        // Category এর parent ConstraintLayout
+        View categoryParent = findViewById(R.id.recyclerViewCategory).getParent() instanceof View ? (View) findViewById(R.id.recyclerViewCategory).getParent() : null;
+        if (categoryParent != null) categoryParent.setVisibility(isSearching ? View.GONE : View.VISIBLE);
+
+        // Popular এর parent ConstraintLayout + seeAllPopular (LinearLayout parent of seeAllPopular এর জন্য আলাদা handle)
+        View popularParent = findViewById(R.id.recyclerViewPopular).getParent() instanceof View ? (View) findViewById(R.id.recyclerViewPopular).getParent() : null;
+        if (popularParent != null) popularParent.setVisibility(isSearching ? View.GONE : View.VISIBLE);
+
+        // Popular section এর seeAllPopular TextView এর parent LinearLayout কে hide/show করা দরকার
+        View popularTitleLayout = findViewById(R.id.seeAllPopular).getParent() instanceof View ? (View) findViewById(R.id.seeAllPopular).getParent() : null;
+        if (popularTitleLayout != null) popularTitleLayout.setVisibility(isSearching ? View.GONE : View.VISIBLE);
+
+        // Recommended এর seeAllRecommendedBtn (TextView) + তার parent LinearLayout
+        findViewById(R.id.seeAllRecommendedBtn).setVisibility(isSearching ? View.GONE : View.VISIBLE);
+
+        View recommendedTitleLayout = findViewById(R.id.seeAllRecommendedBtn).getParent() instanceof View ? (View) findViewById(R.id.seeAllRecommendedBtn).getParent() : null;
+        if (recommendedTitleLayout != null) recommendedTitleLayout.setVisibility(View.VISIBLE); // Recommended title/parent সবসময় show রাখবো
+
+        // Recommended এর parent ConstraintLayout
+        View recommendedParent = findViewById(R.id.recyclerViewRecommended).getParent() instanceof View ? (View) findViewById(R.id.recyclerViewRecommended).getParent() : null;
+        if (recommendedParent != null) recommendedParent.setVisibility(View.VISIBLE);  // Recommended সবসময় show
+
+        // এবার সার্চ টেক্সট অনুসারে ফিল্টারিং
+        if (!isSearching) {
+            // Search খালি হলে পুরো লিস্ট দেখাও
+            recommendedAdapter.updateList(recommendedListFull);
+        } else {
+            ArrayList<RecommendedItem> filteredList = new ArrayList<>();
+            String lowerQuery = query.toLowerCase();
+            for (RecommendedItem item : recommendedListFull) {
+                if (item.getTitle().toLowerCase().contains(lowerQuery) ||
+                        item.getDescription().toLowerCase().contains(lowerQuery)) {
+                    filteredList.add(item);
+                }
+            }
+            recommendedAdapter.updateList(filteredList);
+        }
+    }
+
 
     @Override
     protected void onDestroy() {
