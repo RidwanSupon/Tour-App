@@ -65,14 +65,6 @@ TourApp is a modern, feature-rich Android application that revolutionizes the wa
 | **Firebase Realtime Database** | Backend data storage | Latest |
 | **Firebase Authentication** | User management | Latest |
 
-### **UI/UX Libraries**
-| Library | Purpose | Implementation |
-|:--------|:--------|:---------------|
-| **ViewPager2** | Image sliders and tabs | Enhanced user navigation |
-| **RecyclerView** | Efficient list displays | Optimized scrolling performance |
-| **Glide** | Image loading & caching | Memory-efficient image handling |
-| **Material Design** | Modern UI components | Consistent design language |
-
 ### **Architecture Pattern**
 - **MVVM (Model-View-ViewModel)**: Clean separation of concerns
 - **Repository Pattern**: Centralized data management
@@ -211,16 +203,6 @@ We welcome contributions! Please follow these steps:
 4. Push to branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Ridwan Supon**
-- GitHub: [@RidwanSupon](https://github.com/RidwanSupon)
-- Email: [your.email@example.com](mailto:your.email@example.com)
-
 ## 🙏 Acknowledgments
 
 - Firebase team for excellent backend services
@@ -233,8 +215,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 If you encounter any issues or have questions:
 - Open an issue on GitHub
 - Contact the development team
-- Check the [Wiki](https://github.com/RidwanSupon/TourApp/wiki) for detailed documentation
+- Check the [Wiki](https://github.com/Md-EmranHossen) for detailed documentation
 
----
+
 
 ⭐ **Star this repository if you found it helpful!**
